@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com');
+@import url('https://fonts.gstatic.com');
+@import url('https://fonts.googleapis.com/css2?family=Changa:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace SC:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sulphur+Point:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Capriola:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Outline:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+section {
+    padding: 47px;
+    position: relative;
+    width: 100%;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+
+.progress {
+    padding-block-start: 40px;
+}
+
+.lines {
+    background-color: #ffffff;
+}
+
+.progres {
+    font-family: Bruno Ace SC;
+    font-weight: 400;
+    font-size: 45px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.lp1,
+.lp2,
+.lp3,
+.lp4,
+.lp11,
+.lp22,
+.lp33,
+.lp44 {
+    position: absolute;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text-container {
+    margin-right: auto;
+}
+
+.lp1 {
+    top: 0.5px;
+    left: -10px;
+    transform: rotate(-75.33deg);
+    border-left: 32px solid #ffffffff;
+    border-right: 3px solid #ffffffff;
+    border-top: 0px solid #ffffffff;
+    border-bottom: 1px solid #ffffffff;
+}
+
+.lp2 {
+    top: -0.5px;
+    left: -2px;
+    transform: rotate(-75.96deg);
+    border-left: 32px solid #ffffffff;
+    border-right: 3px solid #ffffffff;
+    border-top: 1px solid #ffffffff;
+    border-bottom: 1px solid #ffffffff;
+}
+
+.lp3 {
+    top: -1px;
+    left: 7px;
+    transform: rotate(-75.48deg);
+    border-left: 33px solid #ffffffff;
+    border-right: 3px solid #ffffffff;
+    border-top: 2px solid #ffffffff;
+    border-bottom: 1px solid #ffffffff;
+}
+
+.lp4 {
+    top: -1.7px;
+    left: 16px;
+    transform: rotate(-75.48deg);
+    border-left: 33px solid #ffffffff;
+    border-right: 3px solid #ffffffff;
+    border-top: 2px solid #ffffffff;
+    border-bottom: 2px solid #ffffffff;
+}
+
+.lp11 {
+    top: 4.5px;
+    left: 340px;
+    transform: rotate(75.33deg);
+    border-left: 23px solid #ffffffff;
+    border-right: 3px solid #ffffffff;
+    border-top: 0px solid #ffffffff;
+    border-bottom: 1px solid #ffffffff;
+}
+
+.lp22 {
+    top: 4px;
+    left: 331px;
+    transform: rotate(75.96deg);
+    border-left: 23px solid #ffffffff;
+    border-right: 3px solid #ffffffff;
+    border-top: 1px solid #ffffffff;
+    border-bottom: 1px solid #ffffffff;
+}
+
+.lp33 {
+    top: 4px;
+    left: 322px;
+    transform: rotate(75.48deg);
+    border-left: 23px solid #ffffffff;
+    border-right: 3px solid #ffffffff;
+    border-top: 2px solid #ffffffff;
+    border-bottom: 1px solid #ffffffff;
+}
+
+.lp44 {
+    top: 3px;
+    left: 313px;
+    transform: rotate(75.48deg);
+    border-left: 23px solid #ffffffff;
+    border-right: 3px solid #ffffffff;
+    border-top: 2px solid #ffffffff;
+    border-bottom: 2px solid #ffffffff;
+}
+
+.btnp {
+    z-index: 4;
+    cursor: pointer;
+    position: relative;
+    width: 150px;
+    height: 51px;
+    background: #667085;
+    border-radius: 15px;
+    margin-bottom: 35px;
+}
+
+.btnp a {
+    color: #fff;
+    text-decoration: none;
+    font-family: Capriola;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.btnp:hover {
+    background: #444d60;
+    border: 1px solid #373f4eff;
+}
+
+.captiont {
+    height: 100%;
+    bottom: 25px;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+}
+
+.capt-p {
+    font-family: Capriola;
+    font-weight: 400;
+    font-size: 20px;
+    color: #BFC6D4;
+}

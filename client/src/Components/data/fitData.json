@@ -1,0 +1,44 @@
+[
+    {
+        "label": "Sun",
+        "weight": 60,
+        "volume": 54,
+        "exercises": 2
+    },
+    {
+        "label": "Mon",
+        "weight": 61,
+        "volume": 120,
+        "exercises": 7
+    },
+    {
+        "label": "Tue",
+        "weight": 63,
+        "volume": 60,
+        "exercises": 5
+    },
+    {
+        "label": "Wed",
+        "weight": 65,
+        "volume": 110,
+        "exercises": 7
+    },
+    {
+        "label": "Thu",
+        "weight": 66,
+        "volume": 30,
+        "exercises": 3
+    },
+    {
+        "label": "Fri",
+        "weight": 66,
+        "volume": 100,
+        "exercises": 8
+    },
+    {
+        "label": "Sat",
+        "weight": 66,
+        "volume": 40,
+        "exercises": 2
+    }
+]

@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com');
+@import url('https://fonts.gstatic.com');
+@import url('https://fonts.googleapis.com/css2?family=Changa:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace SC:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sulphur+Point:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Capriola:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Outline:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
+
+* {
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+    box-sizing: border-box;
+    font-family: Changa;
+}
+
+.signup-page {
+    background: #7287AE;
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.left-section {
+    width: 50%;
+    height: 100%;
+    position: relative;
+}
+
+.signup-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.right-section {
+    flex: 1;
+    position: relative;
+}
+
+.form-log {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Changa;
+    position: relative;
+    z-index: 1;
+}
+
+.showMessage {
+    display: block;
+    background: rgb(158, 18, 18);
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+}
+
+.wrapper {
+    width: 620px;
+    background: #293E6D;
+    position: relative;
+    z-index: 2;
+    color: white;
+    border-radius: 32px;
+    padding: 30px 40px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper h1 {
+    font-size: 53px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.wrapper .two-forms {
+    display: flex;
+    gap: 10px;
+}
+
+.wrapper span {
+    font-size: 17px;
+}
+
+.wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 69px;
+    margin: 20px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    font-size: 17px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.input-box input::placeholder {
+    color: #B4B4B4;
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 95%;
+    transform: translateY(-50%);
+    font-size: 25px;
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 69px;
+    background: #001239;
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    margin: 35px 0 15px;
+}
+
+.wrapper .register-link {
+    font-size: 20px;
+    text-align: center;
+    margin: 10px 0 0;
+}
+
+.register-link p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
+
+.ellipse {
+    position: absolute;
+    filter: blur(75px);
+}
+
+.ellipse1 {
+    transform: rotate(90deg);
+    top: -90px;
+    right: 10px;
+}
+
+.ellipse2 {
+    transform: rotate(110deg);
+    top: 150px;
+    right: 550px;
+}
+
+.ellipse3 {
+    transform: rotate(90deg);
+    top: 300px;
+    right: 70px;
+}
+
+.ellipse4 {
+    transform: rotate(90deg);
+    top: 440px;
+    right: 200px;
+}
