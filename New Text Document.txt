@@ -1,0 +1,4 @@
+sdfsdf@gmail.com
+Пароль: 12345678sdafsd9
+
+Бекенд: npm run start
