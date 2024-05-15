@@ -4,6 +4,8 @@ import bcrypt from "bcrypt";
 import {User} from "../models/user.js";
 import express from 'express';
 import {TrainingHistory} from "../models/traine_history.js";
+import authenticateToken from '../index.js';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -27,9 +29,10 @@ router.post('/auth/register', registerValidator, async (req, res) => {
 
         const user = await doc.save();
 
-        req.session.user = user;
+        const accessToken = jwt.sign({userId: user._id}, process.env.ACCESS_TOKEN_SECRET);
 
-        res.json(user);
+        // Відправляємо JWT назад клієнту
+        res.json({accessToken});
 
     } catch (err) {
         console.log(err)
@@ -49,8 +52,10 @@ router.post('/auth/login', async (req, res) => {
             return res.status(400).json({message: 'Неправильний пароль, спробуйте знову'});
         }
 
-        req.session.user = user;
-        res.json(user);
+        const accessToken = jwt.sign({userId: user._id}, process.env.ACCESS_TOKEN_SECRET);
+
+        // Відправляємо JWT назад клієнту
+        res.json({accessToken});
 
     } catch (err) {
         console.log(err)
@@ -115,7 +120,7 @@ router.get('/user/yearlyTrainingHistory', async (req, res) => {
     let monthlySummaries = {};
 
     for (let i = 0; i < 12; i++) {
-        monthlySummaries[`${2024}.${i+1}`] = {
+        monthlySummaries[`${2024}.${i + 1}`] = {
             count_training: 0,
             count_programs: 0,
             total_weight: 0,
@@ -134,7 +139,7 @@ router.get('/user/yearlyTrainingHistory', async (req, res) => {
     });
 
     for (let i = 0; i < 12; i++) {
-        let summary = monthlySummaries[`${2024}.${i+1}`];
+        let summary = monthlySummaries[`${2024}.${i + 1}`];
         summary.average_weight = summary.count_weight_changed > 0 ? summary.total_weight / summary.count_weight_changed : 0;
     }
 
@@ -270,21 +275,13 @@ router.put('/user/experience', async (req, res) => {
     res.send('Досвід успішно оновлено');
 });
 
-router.get('/checkAuth', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
-    res.send('Досвід успішно оновлено');
+router.get('/checkAuth', authenticateToken, async (req, res) => {
+    res.send('Успошна перевірка на доступ');
 });
 
 
-router.get('/userinfo', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
-    const user = await User.findById(req.session.user._id)
+router.get('/userinfo', authenticateToken, async (req, res) => {
+    const user = await User.findById(req.user._id)
         .populate('favoriteTrainings')
         .populate('favoritePrograms');
 

@@ -31,6 +31,9 @@ const Login = () => {
             email: loginEmail,
             password: loginPassword
         }).then(response => {
+            localStorage.setItem('accessToken', response.data.accessToken);
+
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
             if (response.status === 200) {
                 navigateTo('/profilepage');
             }

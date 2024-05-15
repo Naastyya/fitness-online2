@@ -3,6 +3,7 @@ import {Program, Training} from "../models/training.js";
 import multer from "multer";
 import {User} from "../models/user.js";
 import {TrainingHistory} from "../models/traine_history.js";
+import authenticateToken from '../index.js';
 
 const t_router = express.Router();
 
@@ -149,14 +150,10 @@ t_router.put('/favoritePrograms', async (req, res) => {
 });
 
 // Додавання улюбленого тренування до користувача
-t_router.put('/favoriteTrainings', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
+t_router.put('/favoriteTrainings', authenticateToken,async (req, res) => {
     const { trainingId } = req.body;
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.user._id);
     if (!user) {
         return res.status(404).send('Користувача не знайдено');
     }
