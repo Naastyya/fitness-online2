@@ -30,7 +30,7 @@ export const MainMenu = () => {
     return (
         <>
             <header id="main-header" className="header">
-                <a href="#" className="logo">
+                <a href="/" className="logo">
                     <img src="./src/Components/img/logo.jpg" alt="Logo"/>
                 </a>
                 <ul className="navbar">

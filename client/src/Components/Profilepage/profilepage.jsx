@@ -47,10 +47,10 @@ const Profilepage = () => {
                         <i className='bx bx-user'></i>
                         <span className="side-text"> Profile</span>
                     </NavLink>
-                    <div className="side-list">
+                    <NavLink to="/profilepage/progress" end className="side-list">
                         <i class='bx bx-line-chart'></i>
                         <span className="side-text"> Progress</span>
-                    </div>
+                    </NavLink>
                     <NavLink to="/profilepage/training" end className="side-list">
                         <i class='bx bx-calendar'></i>
                         <span className="side-text"> Training Plan</span>

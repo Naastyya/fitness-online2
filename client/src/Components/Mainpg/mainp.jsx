@@ -125,9 +125,7 @@ const Mainpg = () => {
                         </svg>
                     </svg>
                 </div>
-                <button type="submit" className="btnl">
-                    <a href="/signup" className="btn">LET'S TRY</a>
-                </button>
+                
                 <div className="rectangle"></div>
                 <div className="top">
                     <span className="you">You</span>
@@ -162,8 +160,7 @@ const Mainpg = () => {
                         <div className="l44"></div>
                     </div>
                     <div className="caption">
-                        <span className="capt-p">Get into the rhythm of effective cardio that will get your heart
-                            pumping and your energy flowing.</span>
+                        <span className="capt-p">Choose the best program aimed at strengthening your physical health and maintaining an active lifestyle.</span>
                     </div>
                     <div className="btn-container">
                         <button type="submit" className="btnp">

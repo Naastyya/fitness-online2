@@ -92,14 +92,15 @@ export const MainProfileInfo = () => {
 
     return (
         <>
-            <div style={{width: '85%', height: '85%', backgroundColor: 'white', padding: '16px'}}>
+            <div style={{width: '85%', height: '85%', borderRadius: '10px 10px 0 0', backgroundColor: 'white', padding: '16px'}}>
                 <div style={{marginBottom: '16px'}}>
                     <label style={{
                         display: 'block',
                         color: '#4a5568',
-                        fontSize: '0.875rem',
+                        fontSize: '1rem',
                         fontWeight: 'bold',
-                        marginBottom: '8px'
+                        marginBottom: '8px',
+                        borderRadius: '50px'
                     }} htmlFor="firstname">
                         First name
                     </label>
@@ -126,7 +127,7 @@ export const MainProfileInfo = () => {
                     <label style={{
                         display: 'block',
                         color: '#4a5568',
-                        fontSize: '0.875rem',
+                        fontSize: '1rem',
                         fontWeight: 'bold',
                         marginBottom: '8px'
                     }} htmlFor="lastname">
@@ -151,7 +152,7 @@ export const MainProfileInfo = () => {
                         <p onClick={handleLastNameClick}>{userInfo ? userInfo.last_name : 'Завантаження...'}</p>
                     )}
                 </div>
-                <div style={{display: 'flex', flexWrap: 'nowrap', margin: '-8px'}}>
+                <div style={{display: 'flex', fontSize: '1rem', flexWrap: 'nowrap', margin: '-8px'}}>
                     <EditableText id="age" key={`age-${userInfo ? userInfo.age : 'loading'}`} label="Age"
                                   placeholder="Age" type="number" url="http://localhost:4444/user/age"
                                   initialValue={userInfo ? userInfo.age : 'Завантаження...'} style={{flex: 1}}/>
@@ -167,18 +168,18 @@ export const MainProfileInfo = () => {
                                   initialValue={userInfo ? userInfo.experience : 'Завантаження...'} style={{flex: 1}}/>
                 </div>
             </div>
-            <div style={{width: '85%', backgroundColor: 'white', padding: '16px'}}>
+            <div style={{width: '85%', borderRadius: '0 0 10px 10px', backgroundColor: 'white', padding: '16px'}}>
                 <div style={{
                     display: 'flex',
                     flexWrap: 'nowrap',
                     overflowX: 'auto',
-                    margin: '8px',
+                    margin: '20px',
                     justifyContent: 'center'
                 }}>
                     {/* Карточки */}
                     {currentCards.map((item, i) => (
                         <div key={i}
-                             style={{flex: '0 0 auto', padding: '8px', width: 'calc(100% / 3)', minWidth: '33%'}}>
+                             style={{flex: '0 0 auto', paddingLeft: '3rem', padding: '15px', width: 'calc(100% / 3)', minWidth: '53%'}}>
                             <div style={{
                                 height: '100%',
                                 display: 'flex',
@@ -201,11 +202,12 @@ export const MainProfileInfo = () => {
                                          marginBottom: '16px'
                                      }}
                                      src={'http://localhost:4444' + item.image}
-                                     style={{width: '50%', maxWidth: '50%', minWidth: '25%'}}/>
+                                     style={{width: '53%', maxWidth: '53%', minWidth: '25%'}}/>
                                 <div style={{flexGrow: '1'}}>
                                     <h2 style={{
                                         color: '#1a202c',
                                         fontFamily: 'serif',
+                                        marginTop: '10px',
                                         fontWeight: '500'
                                     }}>{item.name}</h2>
                                     <p style={{color: '#718096'}}>{item.description}</p>

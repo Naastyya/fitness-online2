@@ -45,8 +45,7 @@ const ProgramCatalog = () => {
                         <div className="l44"></div>
                     </div>
                     <div className="caption">
-                        <span className="capt-p">Get into the rhythm of effective cardio that will get your heart
-                            pumping and your energy flowing.</span>
+                        <span className="capt-p">Choose the best program aimed at strengthening your physical health and maintaining an active lifestyle.</span>
                     </div>
                     <ul className="program-list catalog-has-scrollbar">
                         {programs.map((program) => (
