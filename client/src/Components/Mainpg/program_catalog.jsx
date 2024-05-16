@@ -3,6 +3,7 @@ import '../Mainpg/mainp.css';
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom';
+import {MainMenu} from "./main_menu.jsx";
 
 const ProgramCatalog = () => {
 
@@ -26,22 +27,7 @@ const ProgramCatalog = () => {
 
     return (
         <>
-            <header id="main-header" className="header">
-                <a href="#" className="logo">
-                    <img src="./src/Components/img/logo.jpg" alt="Logo"/>
-                </a>
-                <ul className="navbar">
-                    <li><a href="#home" className="home-active">Home</a></li>
-                    <li><a href="#programs">Programs</a></li>
-                    <li><a href="#training">Training</a></li>
-                    <li><a href="#progress">Progress</a></li>
-                    <li><a href="#about">About</a></li>
-                </ul>
-                <div className="nav-button">
-                    <Link to="/login" className="btn" id="login">Log In</Link>
-                    <Link to="/signup" className="btn" id="signup">Sign Up</Link>
-                </div>
-            </header>
+            <MainMenu/>
             {/* ------ Welcome Page Start----------- */}
             <section className="programs has-bg-image" id="programs" style={{paddingTop: '100px'}}>
                 <div className="catalog-container">

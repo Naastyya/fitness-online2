@@ -11,6 +11,8 @@ function TrainingHistoryPanel() {
     });
 
     useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         Axios.get('http://localhost:4444/user/trainingHistory', {params: {date: date.toISOString()}})
             .then(response => {
                 setTrainingHistories(response.data);

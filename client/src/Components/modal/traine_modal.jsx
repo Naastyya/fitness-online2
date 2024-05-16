@@ -13,7 +13,9 @@ function TraineModal() {
     });
 
     useEffect(() => {
-        axios.get(`http://localhost:4444/training/${id}`)
+        const token = localStorage.getItem('accessToken');
+        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        Axios.get(`http://localhost:4444/training/${id}`)
             .then(response => {
                 setTraining(response.data);
             })
@@ -27,9 +29,23 @@ function TraineModal() {
     }
 
     const handleCompleteTraining = () => {
+        const token = localStorage.getItem('accessToken');
+        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         Axios.put('http://localhost:4444/training/complete', {trainingId: id})
             .then(response => {
                 console.log('Тренування успішно додано');
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    };
+
+    const handleAddTrainingFavorite = () => {
+        const token = localStorage.getItem('accessToken');
+        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        Axios.put('http://localhost:4444/favoriteTrainings', {trainingId: id})
+            .then(response => {
+                console.log('Тренування успішно додано до улюблених');
             })
             .catch(error => {
                 console.error('There was an error!', error);
@@ -43,7 +59,7 @@ function TraineModal() {
                     <iframe
                         src={training.videoLink}>
                     </iframe>
-                    <button>Додати до улюблених</button>
+                    <button onClick={handleAddTrainingFavorite}>Додати до улюблених</button>
                     <button onClick={handleCompleteTraining}>Відмітити закінчення вправи</button>
                 </div>
                 <div className="training_text">

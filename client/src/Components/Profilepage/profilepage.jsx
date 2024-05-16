@@ -4,7 +4,6 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {MainProfileInfo} from "./profile_info.jsx";
 import TrainingHistoryPanel from "./train_plan.jsx";
-import {Switch} from "@headlessui/react";
 
 const Profilepage = () => {
     const [myVariable, setMyVariable] = useState(null);
@@ -13,7 +12,10 @@ const Profilepage = () => {
         baseURL: "http://localhost:4444/",
         withCredentials: true,
     });
+
     useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         Axios.get('http://localhost:4444/checkAuth')
             .then(response => {
                 if (response.status === 200) {
@@ -28,15 +30,7 @@ const Profilepage = () => {
     }, []);
 
     const handleLogout = async () => {
-        Axios.get('http://localhost:4444/auth/logout')
-            .then(response => {
-                if (response.status === 200) {
-                    setMyVariable(true);
-                }
-            })
-            .catch(error => {
-                console.error('Помилка при запиті:', error);
-            });
+        localStorage.removeItem('accessToken');
     };
 
     if (isLoading) {
@@ -49,7 +43,7 @@ const Profilepage = () => {
                         <i className='bx bx-home'></i>
                         <span className="side-text"> Home</span>
                     </NavLink>
-                    <NavLink to="/profilepage" className="side-list" activeClassName="active">
+                    <NavLink to="/profilepage" end className="side-list" activeClassName="active">
                         <i className='bx bx-user'></i>
                         <span className="side-text"> Profile</span>
                     </NavLink>
@@ -57,11 +51,11 @@ const Profilepage = () => {
                         <i class='bx bx-line-chart'></i>
                         <span className="side-text"> Progress</span>
                     </div>
-                    <div className="side-list">
+                    <NavLink to="/profilepage/training" end className="side-list">
                         <i class='bx bx-calendar'></i>
                         <span className="side-text"> Training Plan</span>
-                    </div>
-                    <NavLink to="/profilepage/training" className="side-lists" onClick={handleLogout}>
+                    </NavLink>
+                    <NavLink to="/" className="side-lists" onClick={handleLogout}>
                         <i class='bx bx-log-out'></i>
                         <span className="side-text"> Logout</span>
                     </NavLink>

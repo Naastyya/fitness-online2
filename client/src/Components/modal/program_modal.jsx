@@ -14,7 +14,9 @@ function ProgramModal() {
     });
 
     useEffect(() => {
-        axios.get(`http://localhost:4444/program/${id}`)
+        const token = localStorage.getItem('accessToken');
+        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        Axios.get(`http://localhost:4444/program/${id}`)
             .then(response => {
                 setProgram(response.data);
             })
@@ -28,6 +30,8 @@ function ProgramModal() {
     }
 
     const handleCompleteTraining = () => {
+        const token = localStorage.getItem('accessToken');
+        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         Axios.put('http://localhost:4444/training/complete', {trainingId: program.trainings[currentExercise]._id})
             .then(response => {
                 console.log('Тренування успішно додано');
@@ -38,9 +42,23 @@ function ProgramModal() {
     };
 
     const handleCompleteExercise = () => {
+        const token = localStorage.getItem('accessToken');
+        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         Axios.put('http://localhost:4444/program/complete', {programId: id})
             .then(response => {
                 console.log('Програму успішно додано');
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    };
+
+    const handleAddProgramFavorite = () => {
+        const token = localStorage.getItem('accessToken');
+        Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        Axios.put('http://localhost:4444/favoritePrograms', {programId: id})
+            .then(response => {
+                console.log('Програму успішно додано до улюблених');
             })
             .catch(error => {
                 console.error('There was an error!', error);
@@ -55,7 +73,7 @@ function ProgramModal() {
                     <iframe width="420" height="315"
                             src={program.trainings[currentExercise].videoLink}>
                     </iframe>
-                    <button>Додати до улюблених</button>
+                    <button onClick={handleAddProgramFavorite}>Додати до улюблених</button>
                     <button onClick={handleCompleteTraining}>Відмітити закінчення вправи</button>
                     <button onClick={handleCompleteExercise}>Відмітити закінчення программи</button>
                 </div>

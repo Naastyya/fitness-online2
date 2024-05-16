@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import '../Mainpg/mainp.css';
-import {Link} from "react-router-dom";
 import Progress from "../Progress/progress";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import {MainMenu} from "./main_menu.jsx";
 
 const Mainpg = () => {
 
@@ -31,6 +31,7 @@ const Mainpg = () => {
             });
     }, []);
 
+
     const navigate = useNavigate();
 
     const handleClickTraining = (id) => {
@@ -42,22 +43,7 @@ const Mainpg = () => {
     };
     return (
         <>
-            <header id="main-header" class="header">
-                <a href="#" className="logo">
-                    <img src="./src/Components/img/logo.jpg" alt="Logo"/>
-                </a>
-                <ul className="navbar">
-                    <li><a href="#home" className="home-active">Home</a></li>
-                    <li><a href="#programs">Programs</a></li>
-                    <li><a href="#training">Training</a></li>
-                    <li><a href="#progress">Progress</a></li>
-                    <li><a href="#about">About</a></li>
-                </ul>
-                <div className="nav-button">
-                    <Link to="/login" className="btn" id="login">Log In</Link>
-                    <Link to="/signup" className="btn" id="signup">Sign Up</Link>
-                </div>
-            </header>
+            <MainMenu/>
             {/* ------ Welcome Page Start----------- */}
             <section className="home" id="home">
                 <div className="become">
@@ -179,9 +165,15 @@ const Mainpg = () => {
                         <span className="capt-p">Get into the rhythm of effective cardio that will get your heart
                             pumping and your energy flowing.</span>
                     </div>
+                    <div className="btn-container">
+                        <button type="submit" className="btnp">
+                            <a href="/programcatalog" className="btn">View all training</a>
+                        </button>
+                    </div>
                     <ul className="program-list has-scrollbar">
                         {programs.map((program) => (
-                            <li className="scrollbar-item" key={program._id} onClick={() => handleClickProgram(program._id)}>
+                            <li className="scrollbar-item" key={program._id}
+                                onClick={() => handleClickProgram(program._id)}>
                                 <div className="program-card">
                                     <figure className="card-banner">
                                         <img src={'http://localhost:4444' + program.image} width="443" height="558"
@@ -224,9 +216,15 @@ const Mainpg = () => {
                     <div className="captiont">
                         <span className="capt-t">Choose your ideal exercises for the day's workout</span>
                     </div>
+                    <div className="btn-container">
+                        <button type="submit" className="btnp">
+                            <a href="/traincatalog" className="btn">View all training</a>
+                        </button>
+                    </div>
                     <ul className="training-list has-scrollbar">
                         {trainings.map((training) => (
-                            <li className="scrollbar-item" key={training._id} onClick={() => handleClickTraining(training._id)}>
+                            <li className="scrollbar-item" key={training._id}
+                                onClick={() => handleClickTraining(training._id)}>
                                 <div className="training-card">
                                     <figure className="card-banner">
                                         <img src={'http://localhost:4444' + training.image} width="443" height="558"

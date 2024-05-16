@@ -30,6 +30,8 @@ export const EditableText = ({id, label, placeholder, type = 'text', options, in
     });
 
     const handleSave = () => {
+        const token = localStorage.getItem('accessToken');
+        Axios3.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         Axios3.put(url, {[id]: value})
             .then(response => {
                 console.log('Data saved successfully');

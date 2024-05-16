@@ -63,16 +63,12 @@ router.post('/auth/login', async (req, res) => {
     }
 });
 
-router.get('/user/trainingHistory', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
+router.get('/user/trainingHistory', authenticateToken,async (req, res) => {
     if (!req.query.date) {
         return res.status(400).send('Дата не вказана в запиті');
     }
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.user._id);
     console.log('User:', user);  // Додайте це
 
     const date = new Date(req.query.date);
@@ -99,12 +95,8 @@ router.get('/user/trainingHistory', async (req, res) => {
     res.json(trainingHistories);
 });
 
-router.get('/user/yearlyTrainingHistory', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
-    const user = await User.findById(req.session.user._id);
+router.get('/user/yearlyTrainingHistory', authenticateToken,async (req, res) => {
+    const user = await User.findById(req.user._id);
 
     const startOfYear = new Date(Date.UTC(2024, 0, 1));  // Початок 2024 року
     const endOfYear = new Date(Date.UTC(2025, 0, 1));  // Кінець 2024 року
@@ -148,74 +140,51 @@ router.get('/user/yearlyTrainingHistory', async (req, res) => {
 
 
 router.get('/auth/logout', (req, res) => {
-    req.session.destroy((err) => {
-        if (err) {
-            return console.log(err);
-        }
-
-        //res.redirect('/');
-        res.json("You logout");
-    });
+    res.json("You logout");
 });
 
-router.put('/user/name', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
+router.put('/user/name', authenticateToken,async (req, res) => {
     if (!req.body.name) {
         return res.status(400).send('Імя не вказано в запиті');
     }
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.user._id);
     user.first_name = req.body.name;
     await user.save();
 
     res.send('Вік успішно оновлено');
 });
 
-router.put('/user/lastname', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
+router.put('/user/lastname', authenticateToken,async (req, res) => {
     if (!req.body.lastname) {
         return res.status(400).send('Прізвище не вказано в запиті');
     }
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.user._id);
     user.last_name = req.body.lastname;
     await user.save();
 
     res.send('Вік успішно оновлено');
 });
 
-router.put('/user/age', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
+router.put('/user/age', authenticateToken,async (req, res) => {
     if (!req.body.age) {
         return res.status(400).send('Вік не вказано в запиті');
     }
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.user._id);
     user.age = req.body.age;
     await user.save();
 
     res.send('Вік успішно оновлено');
 });
 
-router.put('/user/weight', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
+router.put('/user/weight', authenticateToken,async (req, res) => {
     if (!req.body.weight) {
         return res.status(400).send('Вага не вказана в запиті');
     }
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.user._id);
     const today = new Date().setHours(0, 0, 0, 0);
 
     const trainingHistory = await TrainingHistory.findOne({user: user._id, date: today});
@@ -243,32 +212,24 @@ router.put('/user/weight', async (req, res) => {
     res.send('Вагу успішно оновлено');
 });
 
-router.put('/user/height', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
+router.put('/user/height', authenticateToken,async (req, res) => {
     if (!req.body.height) {
         return res.status(400).send('Вік не вказано в запиті');
     }
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.user._id);
     user.height = req.body.height;
     await user.save();
 
     res.send('Зріст успішно оновлено');
 });
 
-router.put('/user/experience', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
+router.put('/user/experience', authenticateToken, async (req, res) => {
     if (!req.body.experience) {
         return res.status(400).send('Вік не вказано в запиті');
     }
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.user._id);
     user.experience = req.body.experience;
     await user.save();
 

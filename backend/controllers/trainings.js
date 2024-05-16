@@ -18,12 +18,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-t_router.post('/program', upload.single('image'), async (req, res) => {
+t_router.post('/program', authenticateToken, upload.single('image'), async (req, res) => {
     try {
-        if (!req.session.user) {
-            return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-        }
-
         const trainingIds = req.body.trainings;
 
         if (trainingIds.length > 5) {
@@ -41,7 +37,7 @@ t_router.post('/program', upload.single('image'), async (req, res) => {
             description: req.body.description,
             image: '/images/' + req.file.filename,
             trainings: trainingIds,
-            creator: req.session.user._id
+            creator: req.user._id
         });
 
         const savedProgram = await program.save();
@@ -53,13 +49,10 @@ t_router.post('/program', upload.single('image'), async (req, res) => {
 });
 
 
-t_router.post('/training', upload.fields([{name: 'image', maxCount: 1}, {
+t_router.post('/training', authenticateToken, upload.fields([{name: 'image', maxCount: 1}, {
     name: 'imageLink',
     maxCount: 1
 }]), async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
 
     const training = new Training({
         name: req.body.name,
@@ -75,7 +68,7 @@ t_router.post('/training', upload.fields([{name: 'image', maxCount: 1}, {
     res.json(savedTraining);
 });
 
-t_router.put('/program/:programId/trainings', async (req, res) => {
+t_router.put('/program/:programId/trainings', authenticateToken,async (req, res) => {
     const { programId } = req.params;
     const { trainingId } = req.body;
 
@@ -131,14 +124,10 @@ t_router.get('/random-trainings', async (req, res) => {
     res.json(trainings);
 });
 
-t_router.put('/favoritePrograms', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
+t_router.put('/favoritePrograms', authenticateToken,async (req, res) => {
     const { programId } = req.body;
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.user._id);
     if (!user) {
         return res.status(404).send('Користувача не знайдено');
     }
@@ -188,16 +177,12 @@ t_router.get('/program/:programId', async (req, res) => {
     res.json(program);
 });
 
-t_router.put('/training/complete', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
+t_router.put('/training/complete', authenticateToken,async (req, res) => {
     if (!req.body.trainingId) {
         return res.status(400).send('ID тренування не вказано в запиті');
     }
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.user._id);
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
 
@@ -215,16 +200,12 @@ t_router.put('/training/complete', async (req, res) => {
     res.send('Тренування успішно додано');
 });
 
-t_router.put('/program/complete', async (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Неавторизований доступ: Ви повинні увійти до системи!');
-    }
-
+t_router.put('/program/complete', authenticateToken,async (req, res) => {
     if (!req.body.programId) {
         return res.status(400).send('ID програми не вказано в запиті');
     }
 
-    const user = await User.findById(req.session.user._id);
+    const user = await User.findById(req.user._id);
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
 

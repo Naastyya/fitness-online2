@@ -9,9 +9,27 @@ export const MainProfileInfo = () => {
     const [isEditingLastName, setIsEditingLastName] = useState(false);
     const [lastName, setLastName] = useState('');
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [cardsPerPage,] = useState(3);
     const [userInfo, setUserInfo] = useState(null);
     const [favoriteTrainings, setFavoriteTrainings] = useState([]);
     const [favoritePrograms, setFavoritePrograms] = useState([]);
+
+// Обчислюємо кількість сторінок
+    const totalPages = Math.ceil(favoriteTrainings.concat(favoritePrograms).length / cardsPerPage);
+
+// Визначаємо картки для поточної сторінки
+    const currentCards = favoriteTrainings.concat(favoritePrograms).slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
+
+// Функції для переключення сторінок
+    const goToNextPage = () => {
+        setCurrentPage(page => Math.min(page + 1, totalPages))
+    };
+
+    const goToPreviousPage = () => {
+        setCurrentPage(page => Math.max(page - 1, 1))
+    };
+
 
     const Axios2 = axios.create({
         baseURL: "http://localhost:4444/",
@@ -20,6 +38,8 @@ export const MainProfileInfo = () => {
 
     useEffect(() => {
         // Отримання даних про користувача
+        const token = localStorage.getItem('accessToken');
+        Axios2.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         Axios2.get('http://localhost:4444/userinfo')
             .then(response => {
                 setUserInfo(response.data);
@@ -156,7 +176,7 @@ export const MainProfileInfo = () => {
                     justifyContent: 'center'
                 }}>
                     {/* Карточки */}
-                    {favoriteTrainings.concat(favoritePrograms).map((item, i) => (
+                    {currentCards.map((item, i) => (
                         <div key={i}
                              style={{flex: '0 0 auto', padding: '8px', width: 'calc(100% / 3)', minWidth: '33%'}}>
                             <div style={{
@@ -203,7 +223,7 @@ export const MainProfileInfo = () => {
                         fontWeight: 'bold',
                         padding: '8px 16px',
                         borderRadius: '4px'
-                    }}>
+                    }} onClick={goToPreviousPage}>
                         Previous
                     </button>
                     <button style={{
@@ -213,7 +233,7 @@ export const MainProfileInfo = () => {
                         fontWeight: 'bold',
                         padding: '8px 16px',
                         borderRadius: '4px'
-                    }}>
+                    }} onClick={goToNextPage}>
                         Next
                     </button>
                 </div>
